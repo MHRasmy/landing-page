@@ -65,9 +65,11 @@ window.addEventListener('scroll', function(){
         const bound = Math.floor(section.getBoundingClientRect().top);
         // remove the active class
         section.classList.remove('your-active-class');
+        section.style.cssText = "background-color: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%)";
         if((bound < 300) && (bound>-300)){
             // adding the active class
             section.classList.add('your-active-class');
+            section.style.cssText = "background-color: rgb(136,203,171); opacity:0.6;";
         }
     });
     
@@ -82,18 +84,16 @@ window.addEventListener('scroll', function(){
  * so I implemented it with the CSS hhtml{scroll-behavior: smooth;}
  * the function below was the last scroll function I've tried
 */
-
-/*
 function scroll(){
-    navigation.addEventListener('click', function(event){
-        event.preventDefault();
-        if (event.target.dataset.nav) {
-            document.getElementById(`${event.target.dataset.nav}`).scrollIntoView({ behavior: "smooth" });
-        }  
+    const links = document.querySelectorAll('.menu__link');
+    links.forEach(function(link){
+        link.addEventListener('click', function(event){
+            const element = document.getElementById(link.getAttribute("href"));
+            element.scrollIntoView({behavior:"smooth", block:"center"});
+        });
     });
 };
 scroll();
-*/
 
 
 /**
