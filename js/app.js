@@ -47,7 +47,7 @@ function navBuild(){
         const sectionID = section.id;
         const sectionDataNav = section.dataset.nav;
         let navList = document.createElement('li');
-        navList.innerHTML = `<a class= "menu__link" href ="#${sectionID}">${sectionDataNav}</a>`;
+        navList.innerHTML = `<a class= "menu__link" data-link="${sectionID}" href ="#${sectionID}">${sectionDataNav}</a>`;
         //append all sections to the nav bar
         navigation.appendChild(navList);
     });
@@ -84,16 +84,15 @@ window.addEventListener('scroll', function(){
  * so I implemented it with the CSS hhtml{scroll-behavior: smooth;}
  * the function below was the last scroll function I've tried
 */
-function scroll(){
-    const links = document.querySelectorAll('.menu__link');
-    links.forEach(function(link){
-        link.addEventListener('click', function(event){
-            const element = document.getElementById(link.getAttribute("href"));
-            element.scrollIntoView({behavior:"smooth", block:"center"});
-        });
+
+const links = document.querySelectorAll('.menu__link');
+links.forEach(function(link){
+    link.addEventListener('click', function(event){
+        event.preventDefault();
+        const element = document.getElementById(link.getAttribute("data-link"));
+        element.scrollIntoView({behavior:"smooth", block:"center"});
     });
-};
-scroll();
+});
 
 
 /**
